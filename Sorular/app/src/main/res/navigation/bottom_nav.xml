@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_nav"
+    app:startDestination="@id/action_home">
+
+    <fragment
+        android:id="@+id/action_home"
+        android:name="com.example.sorular.Fragments.PageHome"
+        android:label="fragment_page_home"
+        tools:layout="@layout/fragment_page_home" >
+        <action
+            android:id="@+id/action_action_home_to_action_dashboard"
+            app:destination="@id/action_dashboard" />
+    </fragment>
+    <fragment
+        android:id="@+id/action_dashboard"
+        android:name="com.example.sorular.Fragments.PageDashboard"
+        android:label="fragment_page_dashboard"
+        tools:layout="@layout/fragment_page_dashboard" >
+        <argument android:name="invate"
+            app:argType="com.example.sorular.Adaptors.InvateAdaptor" />
+        <action
+            android:id="@+id/action_action_dashboard_to_action_not"
+            app:destination="@id/action_not" />
+    </fragment>
+    <fragment
+        android:id="@+id/action_not"
+        android:name="com.example.sorular.Fragments.PageNotification"
+        android:label="fragment_page_notification"
+        tools:layout="@layout/fragment_page_notification" />
+</navigation>
