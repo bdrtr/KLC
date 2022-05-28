@@ -1,5 +1,6 @@
 package com.example.sorular.Fragments;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -7,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.ResultReceiver;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +31,7 @@ import java.util.ArrayList;
 public class PageHome extends Fragment {
     private RecyclerView recyclerView;
     private View root;
-    private ArrayList<ResultAdaptor> RA = new ArrayList<>();
+    private ArrayList<ResultAdaptor> ResultAdaptor = new ArrayList<>();
     private ResultCardView resCard;
     private ResultsDBO resDBO;
     @Override
@@ -38,28 +40,27 @@ public class PageHome extends Fragment {
         root = inflater.inflate(R.layout.fragment_page_home, container, false);
 
         definetions();
-        resCard = new ResultCardView(getContext(),RA);
+        resCard = new ResultCardView(getContext(),ResultAdaptor);
         recyclerView.setAdapter(resCard);
         LoadData();
         return root;
     }
 
     private void LoadData() {
-
+        ResultAdaptor.clear();
         resDBO.get().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot d: snapshot.getChildren()) {
                     ResultAdaptor i = d.getValue(ResultAdaptor.class);
-                    RA.add(i);
-                }
+                    ResultAdaptor.add(i);
 
+                }
                 resCard.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.i("----------","errrırır");
             }
         });
     }

@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.provider.ContactsContract;
 
 import com.example.sorular.Adaptors.InvateAdaptor;
 import com.example.sorular.Adaptors.QuestionAdaptor;
@@ -12,10 +11,10 @@ import java.util.ArrayList;
 
 public class QuestionDBO {
 
-    public ArrayList<QuestionAdaptor> getQuestions(DatabaseHelper vt, int num, InvateAdaptor invate, Context cnt) {
+    public ArrayList<QuestionAdaptor> getQuestions(DatabaseHelper vt, int num, InvateAdaptor invate) {
         ArrayList<QuestionAdaptor> questionAdaptors = new ArrayList<>();
         SQLiteDatabase dbx = vt.getWritableDatabase();
-        Cursor c = dbx.rawQuery("SELECT * FROM Sorular ORDER BY RANDOM() LIMIT "+num,null);
+        Cursor c = dbx.rawQuery("SELECT * FROM Sorular LIMIT "+num,null);
 
         while(c.moveToNext()) {
             QuestionAdaptor myQuestion = new QuestionAdaptor(

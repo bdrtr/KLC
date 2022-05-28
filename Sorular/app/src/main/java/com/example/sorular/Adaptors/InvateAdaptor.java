@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 public class InvateAdaptor implements Serializable {
 
-    private String sender;
     private int questions;
     private int shuffled;
     private int time;
@@ -13,19 +12,11 @@ public class InvateAdaptor implements Serializable {
     public InvateAdaptor() {
     }
 
-    public InvateAdaptor(String sender, int questions, int shuffled, int time) {
-        this.sender = sender;
+    public InvateAdaptor(String user, int questions, int shuffled, int time) {
         this.questions = questions;
         this.shuffled = shuffled;
         this.time = time;
-    }
-
-    public String getSender() {
-        return sender;
-    }
-
-    public void setSender(String sender) {
-        this.sender = sender;
+        this.user = user;
     }
 
     public int getQuestions() {

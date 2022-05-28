@@ -36,7 +36,7 @@ public class CardViewV extends RecyclerView.Adapter<CardViewV.HolderDesign> {
     @Override
     public void onBindViewHolder(@NonNull HolderDesign holder, int position) {
         InvateAdaptor invateAdaptor = invates.get(position);
-        holder.sender.setText(invateAdaptor.getSender());
+        holder.sender.setText(invateAdaptor.getUser());
         holder.questions.setText(String.valueOf(invateAdaptor.getQuestions()));
         holder.time.setText(String.valueOf(invateAdaptor.getTime()));
 

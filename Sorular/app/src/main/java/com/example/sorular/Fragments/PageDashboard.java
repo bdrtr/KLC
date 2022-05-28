@@ -49,9 +49,11 @@ public class PageDashboard extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getContext(), AddInvate.class);
-                i.putExtra("name","system");
+                /*Intent i = new Intent(getContext(), AddInvate.class);
+                i.putExtra("name","");
                 startActivity(i);
+                */
+                startActivity(new Intent(getContext(), AddInvate.class));
             }
         });
 
@@ -62,7 +64,7 @@ public class PageDashboard extends Fragment {
         recyclerView = root.findViewById(R.id.recycle_view_dash);
         recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        fab = root.findViewById(R.id.floatingActionButton2);
+        fab = root.findViewById(R.id.floatingActionButton);
         invateDBO = new InvateAdaptorDBO();
 
     }

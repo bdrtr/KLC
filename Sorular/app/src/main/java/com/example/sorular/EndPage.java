@@ -18,8 +18,10 @@ public class EndPage extends AppCompatActivity {
 
     private TextView who,trueS,falseS,timeS;
     private Button send;
-    private ResultAdaptor ra;
-    private InvateAdaptor inv;
+    private ResultAdaptor resultAdaptor;
+    private InvateAdaptor invateAdaptor;
+    private long usedTime;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,13 +33,13 @@ public class EndPage extends AppCompatActivity {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainPage.class);
+                //Intent intent = new Intent(getApplicationContext(), MainPage.class);
                 ResultsDBO rdb = new ResultsDBO();
-                SharedPreferences sp = getSharedPreferences("All_names",MODE_PRIVATE);
-                String user_name = sp.getString("name","");
-                ra.setName(user_name);
-                rdb.add(ra);
-                startActivity(intent);
+                SharedPreferences sp = getSharedPreferences("NamesTable",MODE_PRIVATE);
+                resultAdaptor.setName(sp.getString("userName",""));
+                resultAdaptor.setTimeOb(usedTime);
+                rdb.add(resultAdaptor);
+                startActivity(new Intent(getApplicationContext(), MainPage.class));
             }
         });
     }
@@ -51,16 +53,16 @@ public class EndPage extends AppCompatActivity {
     }
 
     public void take() {
-        ra = (ResultAdaptor) getIntent().getSerializableExtra("nesne");
-        inv = (InvateAdaptor) getIntent().getSerializableExtra("invate");
+        resultAdaptor = (ResultAdaptor) getIntent().getSerializableExtra("resultObject");
+        invateAdaptor = (InvateAdaptor) getIntent().getSerializableExtra("invate");
     }
 
     public void fill() {
 
-        who.setText("user: "+ra.getName());
-        trueS.setText("doğru sayısı: "+ra.getTrueOptions());
-        falseS.setText("yanlıs sayısı: "+ra.getFalseOptions());
-        long usedTime = (long)inv.getTime()-ra.getTimeOb();
+        who.setText("user: "+resultAdaptor.getName());
+        trueS.setText("doğru sayısı: "+resultAdaptor.getTrueOptions());
+        falseS.setText("yanlıs sayısı: "+resultAdaptor.getFalseOptions());
+        usedTime = (long)invateAdaptor.getTime()*60-resultAdaptor.getTimeOb();
         timeS.setText("harcanan zaman: "+usedTime);
     }
 }

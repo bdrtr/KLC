@@ -12,14 +12,10 @@ import com.example.sorular.Adaptors.InvateAdaptor;
 
 public class TruePage extends AppCompatActivity {
 
-    private TextView questions;
-    private TextView sender;
-    private TextView time;
+    private TextView questions,sender,time;
     private Button btn;
     private String sendertext;
-    private int time_i;
-    private int shuffled_i;
-    private int questions_i;
+    private int time_i, shuffled_i,questions_i;
     private InvateAdaptor invate;
 
     @Override
@@ -42,15 +38,15 @@ public class TruePage extends AppCompatActivity {
 
     public void take() {
         invate = (InvateAdaptor) getIntent().getSerializableExtra("nesne");
-        sendertext = invate.getSender();
+        sendertext = invate.getUser();
         time_i = invate.getTime();
         shuffled_i = invate.getShuffled();
         questions_i = invate.getQuestions();
     }
 
     public void fill() {
-        questions.setText("questions : "+String.valueOf(questions_i));
-        time.setText("time: "+String.valueOf(time_i));
+        questions.setText("questions : "+questions_i);
+        time.setText("time: "+time_i);
         sender.setText("sender: "+sendertext);
 
     }

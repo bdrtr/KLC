@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         definetions();
+        takeName();
 
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,14 +32,14 @@ public class MainActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(name)) {
                     name = "empty";
                 }
-                Toast.makeText(getApplicationContext(),"welcome "+ name,Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(MainActivity.this,MainPage.class);
-                SharedPreferences sp = getSharedPreferences("All_names",MODE_PRIVATE);
+                Toast.makeText(getApplicationContext(),"Merhaba "+ name,Toast.LENGTH_LONG).show();
+                //Intent intent = new Intent(MainActivity.this,MainPage.class);
+                SharedPreferences sp = getSharedPreferences("NamesTable",MODE_PRIVATE);
                 SharedPreferences.Editor editS = sp.edit();
-                editS.putString("name",name);
+                editS.putString("userName",name);
                 editS.commit();
-                intent.putExtra("name",name);
-                startActivity(intent);
+                //intent.putExtra("name",name);
+                startActivity(new Intent(MainActivity.this, MainPage.class));
             }
         });
 
@@ -46,6 +47,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void takeName() {
+        SharedPreferences sp = getSharedPreferences("NamesTable",MODE_PRIVATE);
+        get_name.setText(sp.getString("userName",""));
+
+    }
     public void definetions() {
         welcome_text = findViewById(R.id.WELCOME_text_main);
         get_name = findViewById(R.id.get_name_main);

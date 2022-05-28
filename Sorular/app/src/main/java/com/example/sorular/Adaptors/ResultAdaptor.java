@@ -1,6 +1,7 @@
 package com.example.sorular.Adaptors;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class ResultAdaptor implements Serializable {
 
@@ -8,6 +9,7 @@ public class ResultAdaptor implements Serializable {
     private int trueOptions;
     private int falseOptions;
     private long timeOb;
+    private ArrayList<Integer> wrongs;
 
     public ResultAdaptor() {
     }
@@ -49,5 +51,13 @@ public class ResultAdaptor implements Serializable {
 
     public void setTimeOb(long timeOb) {
         this.timeOb = timeOb;
+    }
+
+    public ArrayList<Integer> getWrongs() {
+        return wrongs;
+    }
+
+    public void setWrongs(ArrayList<Integer> wrongs) {
+        this.wrongs = wrongs;
     }
 }

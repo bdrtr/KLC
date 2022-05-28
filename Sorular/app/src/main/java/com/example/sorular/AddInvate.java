@@ -6,8 +6,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,11 +23,9 @@ import java.util.Locale;
 
 public class AddInvate extends AppCompatActivity {
 
-    private EditText questions;
-    private EditText shuffled;
-    private EditText time;
+    private EditText questions,shuffled,time;
     private Button conf;
-    private FragmentManager fm;
+    private  InvateAdaptorDBO invateAdaptorDBO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +33,7 @@ public class AddInvate extends AppCompatActivity {
         setContentView(R.layout.activity_add_invate);
 
         definetions();
+
         conf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,16 +41,18 @@ public class AddInvate extends AppCompatActivity {
                 int shuffled_i = Integer.parseInt(shuffled.getText().toString());
                 int time_i = Integer.parseInt(time.getText().toString());
 
-                String name = getIntent().getStringExtra("name");
-                Log.i("----------+++------",name);
+                //String name = getIntent().getStringExtra("name"); name with shared preference
+                SharedPreferences sp = getSharedPreferences("NamesTable", MODE_PRIVATE);
+                String name = sp.getString("userName","");// name from shared preference
+
                 InvateAdaptor invate = new InvateAdaptor(name,question_i,shuffled_i,time_i);
+                invateAdaptorDBO.add(invate);//push the invate to FireBase with together it's class name
 
-                InvateAdaptorDBO invateAdaptorDBO = new InvateAdaptorDBO();
-                invateAdaptorDBO.add(invate);
-
-                Intent i = new Intent(getApplicationContext(), PageDashboard.class);
+                /*Intent i = new Intent(getApplicationContext(), PageDashboard.class);
                 i.putExtra("nesne",invate);
-                startActivity(i);
+                startActivity(i); //last Code
+                 */
+                startActivity(new Intent(getApplicationContext(),PageDashboard.class));
             }
         });
     }
@@ -59,6 +62,7 @@ public class AddInvate extends AppCompatActivity {
         shuffled = findViewById(R.id.shuffle_add_page);
         time = findViewById(R.id.time_add_page);
         conf = findViewById(R.id.confirm_add_page);
+        invateAdaptorDBO = new InvateAdaptorDBO();
 
     }
 }

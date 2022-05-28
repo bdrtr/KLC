@@ -14,7 +14,6 @@ public class ResultsDBO {
     private ArrayList<ResultAdaptor> results = new ArrayList<>();
     private DatabaseReference dbref;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private String user_name;
 
     public ResultsDBO() {
         dbref = database.getReference(ResultAdaptor.class.getSimpleName());

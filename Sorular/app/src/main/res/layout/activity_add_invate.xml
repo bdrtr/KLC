@@ -38,7 +38,7 @@
         android:layout_height="53dp"
         android:layout_marginTop="35dp"
         android:ems="10"
-        android:hint="time?(second)"
+        android:hint="time?(minute)"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
